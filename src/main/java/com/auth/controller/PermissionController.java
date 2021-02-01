@@ -1,6 +1,7 @@
 package com.auth.controller;
 
 
+import com.auth.dto.GeneralResponse;
 import com.auth.dto.PermissionDto;
 import com.auth.service.PermissionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Validated
@@ -21,12 +23,12 @@ public class PermissionController {
     private PermissionService permissionService;
 
     @GetMapping
-    public ResponseEntity<?> getAllPermissions(){
+    public ResponseEntity<List<PermissionDto>> getAllPermissions(){
         return ResponseEntity.ok(permissionService.getAllPermissions());
     }
 
     @PostMapping
-    public ResponseEntity<?> createNewPermission(@Valid  @RequestBody PermissionDto permissionDto){
+    public ResponseEntity<GeneralResponse> createNewPermission(@Valid  @RequestBody PermissionDto permissionDto){
         return ResponseEntity.ok(permissionService.createNewPermission(permissionDto));
     }
 }

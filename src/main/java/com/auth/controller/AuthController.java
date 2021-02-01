@@ -1,6 +1,8 @@
 package com.auth.controller;
 
 import javax.validation.Valid;
+
+import com.auth.dto.JwtResponse;
 import com.auth.dto.LoginRequest;
 import com.auth.dto.SignupRequestDto;
 import com.auth.exceptions.AuthServiceException;
@@ -25,13 +27,13 @@ public class AuthController {
     @Autowired
     private UserService userService;
     @PostMapping("/login")
-    public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws AuthServiceException {
+    public ResponseEntity<JwtResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) throws AuthServiceException {
 
         return ResponseEntity.ok(userService.authenticateUser(loginRequest));
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequestDto signUpRequestDto) throws AuthServiceException {
+    public ResponseEntity<JwtResponse> registerUser(@Valid @RequestBody SignupRequestDto signUpRequestDto) throws AuthServiceException {
         return ResponseEntity.ok(userService.registerUser(signUpRequestDto));
     }
 }
