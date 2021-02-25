@@ -23,8 +23,8 @@ public class BookingController {
     private WebHookServiceImpl webHookService;
 
     @PostMapping("/webhook")
-    public ResponseEntity saveWebhook( @RequestBody BookingWebHooksRequest request) throws AuthServiceException {
-        webHookService.saveWebhook(request);
+    public ResponseEntity saveWebhook( @RequestParam("data") String data, @RequestParam("sign") String sign) throws AuthServiceException {
+        webHookService.saveWebhook(new BookingWebHooksRequest(data,sign));
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
